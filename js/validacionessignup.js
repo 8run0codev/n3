@@ -1,37 +1,71 @@
 function validar() {
 
 	var nombre;
-	var apellidopaterno;
-	var apellidomaterno;
-	var telefono;
-	var correo;
-	var pass;
-	var pass2;
-	var year;
-	var dia;
-	var genero;
+	var apellidopaterno="";
+	var apellidomaterno="";
+	var correo="";
+	var pass="";
+	var pass2="";
+	var year="";
+	var dia="";
+	var genero="";
+	var user="";
 
 	nombre = document.getElementById("nombre").value;
 	apellidopaterno = document.getElementById("apellidopaterno").value;   
-	apellidomaterno = document.getElementById("apellidomaterno").value;   
-	telefono = document.getElementById("telefono").value;      
+	apellidomaterno = document.getElementById("apellidomaterno").value;         
 	correo = document.getElementById("correo").value;
 	dia = document.getElementById("day").value;
 	year = document.getElementById("year").value;
 	pass = document.getElementById("pass").value;
 	pass2 = document.getElementById("pass2").value; 	
 	indice = document.getElementById("opc").selectedIndex;    
-	genero = document.getElementsByName ("Genero");
+	genero = document.getElementsByName("Genero");
+	user = document.getElementById("user").value;
 
-	expresion = /\w+@\w+\.+[a-z]/;
+	expresion = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
+	expresion1 = /^[a-zA-Z·ÈÌÛ˙¡…Õ”⁄]*$/i;
 
-	if (nombre === "" || apellidomaterno === "" || apellidopaterno === "" || telefono === "" || correo === "" || pass === "" || dia === "" || year === "") {
+	if (nombre === "" || apellidomaterno === "" || apellidopaterno === "" || user === "" || correo === "" || pass === "" || dia === "" || year === "") {
 		sweetAlert("Oops...", "Todos los campos son obligatorios", "error");
 		return false;
 	}
 
 	if (nombre <= 0 || nombre >= 0) {
 		sweetAlert("Oops...", "El nombre no puede contener numeros", "error");
+		return false;
+	}
+	if (expresion1.test(nombre)) {
+		
+	}
+	else
+	{
+		sweetAlert("Oops...", "El nombre no es valido", "error");
+		return false;
+	} 
+
+	if (expresion1.test(apellidopaterno)) {
+		
+	}
+	else
+	{
+		sweetAlert("Oops...", "El apellido paterno no es valido", "error");
+		return false;
+	}
+
+	if (expresion1.test(apellidomaterno)) {
+
+	}
+	else{
+		sweetAlert("Oops...", "El apellido materno no es valido", "error");
+		return false;
+	}
+
+	if (expresion1.test(user)) {
+		
+	}
+	else{
+		sweetAlert("Oops...", "El apellido usuario no es valido", "error");
 		return false;
 	}
 
@@ -44,12 +78,6 @@ function validar() {
 	if (apellidomaterno <= 0 || apellidomaterno >= 0) {
 
 		sweetAlert("Oops...", "El apellido materno no puede contener numeros", "error");
-		return false;
-	}
-
-	if(isNaN(telefono)) {
-
-		sweetAlert("Oops...", "El telefono no es numerico", "error");
 		return false;
 	}
 
@@ -104,7 +132,7 @@ function validar() {
 		return false;
 	}
 
-	if (year >1900 && year <=2100) 
+	if (year >1900 && year <=2016) 
 	{
 
 	}
@@ -134,11 +162,13 @@ function validar() {
 
 	var largopass = pass.length;
 
-	if (largopass <= 3) 
+	if (largopass <= 4) 
 	{
-
+		sweetAlert("Oops...", "La contrase√±a debe tener almens 5 caracteres", "error");
 		return false;
 	}
+
+
 
 	var seleccionado = false;
 	for(var i=0; i<genero.length; i++) {    
@@ -153,4 +183,4 @@ function validar() {
 		return false;
 	}
 
-}
+}			

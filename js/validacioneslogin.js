@@ -1,4 +1,3 @@
-
 function validar() {
 
 	var correo;
@@ -22,4 +21,4 @@ function validar() {
 	}
 	
 
-}
+}		

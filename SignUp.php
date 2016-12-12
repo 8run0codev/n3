@@ -12,50 +12,55 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript" async src="js/validacionessignup.js"></script>
 	<script type="text/javascript" async src="js/jquery.js"></script>
-	<script type="text/javascript" async src="js/fbsignup.js"></script>
 	<script type="text/javascript" async src="js/materialize.min.js"></script>
 	<script src="dist/sweetalert-dev.js"></script> 
+	<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+
 </head>
 <body>
+	<noscript>
+		<div class="container">
+			<center class="animated pulse infinite">
+				<h5><p>ATENCIÓN</p></h5>
+				<font color="red"><h5 class="red-text"><p>La página que estás viendo requiere para su funcionamiento el uso de JavaScript. 
+					Si lo has deshabilitado intencionadamente, por favor vuelve a activarlo.</p></h5></font>
+				</center>
+			</div>
+		</noscript>
+			
 	<div class="container">
 		<div class="row">	
 			<div class="s12 m12 l12 center">
 				<a href="index.php"><h1>n³</h1></a>
 			</div>
-			<!-- Facebook login-->
-
-			<script type="text/javascript">
-				// Load the SDK FACEBOOK asynchronously
-				(function(d, s, id) {
-					var js, fjs = d.getElementsByTagName(s)[0];
-					if (d.getElementById(id)) return;
-					js = d.createElement(s); js.id = id;
-					js.src = "//connect.facebook.net/en_US/sdk.js";
-					fjs.parentNode.insertBefore(js, fjs);
-				}(document, 'script', 'facebook-jssdk'));
-			</script>
-
-			<div class="col s12 m12 l12" id="FacebookLogin">
-				<div class="col s0 m3 l3"></div>
-				<div class="col s12 m6 l6">
-						<button class="waves-effect waves-light btn-large center" type="submit" name="enviar" id="btn_signupfacebook">REGISTRATE CON FACEBOOK
-						<i class="material-icons right">send</i>
-						</button>	
-				</div>
-				<div class="col s0 m3 l3"></div>
-			</div>
-
-			<!--FIN Facebook login-->
-
 			<div class="col s12 m12 l12">
 				<br>
 				<hr width="50%">
 			</div>
 
+
+<?php
+
+							if (isset($_GET['error'])) {
+								echo '<center><h4 class="red-text">Datos no validos</h4></center>';
+							}
+							if (isset($_GET['comp'])) {
+								echo '<center><h4 class="red-text">Inicie sesión para continuar</h4></center>';
+								?>
+								<input type="hidden" name="ver" value="comp">
+								<?php
+							}
+
+                                                        if(isset($_GET['existe'])){
+                                                                echo'<center>ya hay una cuenta con ese correo</center>';
+                                                        }
+
+							?>
+
 			<!-- Registrar cuenta -->
 			<div class="col s0 m0 l3"></div>
 			<div class="col s12 m12 l6 "  id="signup ">
-				<form name="signup" method="post" action="cuenta.php" onsubmit="return validar();">
+				<form name="signup" method="post" action="cuneta.php" onsubmit="return validar();">
 					<br><label><h4>Registra una cuenta nueva:</h4></label>
 					<br><label>Nombre(s)</label>
 					<input type="text" name="nombre" id="nombre">
@@ -95,8 +100,8 @@
 						<input type="text" name="year" id="year" placeholder="Año">
 					</div>					
 					<div class="col s6 m6 l6">
-						<label>Telefono</label>
-						<input type="text" name="telefono" id="telefono">
+						<label>Usuario</label>
+						<input type="text" name="user" id="user">
 					</div>
 					<div class="col s6 m6 l6">
 						<label>Correo</label>

@@ -4,10 +4,6 @@ session_start();
 include '../conexion.php';
 if (isset($_SESSION['Usuario'])) {
 
-}else{
-	header("Location: ../index.php?Error=Acceso denegado");
-}
-
 ?>
 
 <?php
@@ -29,4 +25,9 @@ if (isset($_SESSION['Usuario'])) {
 	mysql_query($Sql)or die(mysql_error());
 	header("Location: ../index.php");
 
+?>
+<?php
+}else{
+	header("Location: ../403.html?Error=Acceso denegado");
+}
 ?>

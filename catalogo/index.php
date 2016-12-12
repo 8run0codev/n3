@@ -1,3 +1,8 @@
+<?php
+
+	session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,60 +10,145 @@
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="../favicon.png" />
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../css/home.css" media="none" onload="if(media!='all')media='all'">
-	<link rel="stylesheet" type="text/css" href="../css/materialize.css" media="none" onload="if(media!='all')media='all'">
+	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="../css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="../css/animate.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript" src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
-	<!--		<script type="text/javascript">
-				function yHandler(){
-			// Watch video for line by line explanation of the code
-			// http://www.youtube.com/watch?v=eziREnZPml4
-			var wrap = document.getElementById('wrap');
-			var contentHeight = wrap.offsetHeight;
-			var yOffset = window.pageYOffset; 
-			var y = yOffset + window.innerHeight;
-			if(y >= contentHeight){
-				// Ajax call to get more dynamic data goes here
-			wrap.innerHTML += '<div class="col s12 m6 l3"> <div class="card"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="img/producto1.jpg" width="500"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">Nombre producto<i class="material-icons right">more_vert</i></span> <p><a href="#"><h5>COMPRAR</h5></a></p> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">Nombre producto<i class="material-icons right">close</i></span> <p>Here is some more information about this product that is only revealed once clicked on.</p> </div> </div> </div> '; 
-		}
-				var status = document.getElementById('status');
-				status.innerHTML = contentHeight+" | "+y;
-			}
-			window.onscroll = yHandler;
-		</script> -->
+
 </head>
-<body>
+<body class="animated fadeIn">
 
 	<!--Inicio de la barra de navegacion-->
 	<div class="navbar-fixed">
-		<nav>
-			<div class="nav-wrapper">
-				<a href="../index.php" id="Logo" class="brand-logo left"><img src="../img/buenFin.png" height="50px">n³</a><a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"><i class="material-icons">menu</i></i></a>
-				<ul  id="enlaces_menu" class="hide-on-med-and-down">
-					<li><a href="../catalogo/index.php">Tienda</a></li>
-					<li><a href="../ofertas/index.php">Ofertas</a></li>
-					<li><a href="../tutoriales/index.php">Tutoriales</a></li>
-					<ul id="" class="hide-on-med-and-down right">	
-						<li><a href="../carrito/index.php" id="BotonCarrito"><img height="50px" src="../img/carrito.png"></a></li>
-						<li><a href="../SignUp.php" id="BotonSignUp">Registrate</a></li>
-						<li><a href="../Login.php" id="BotonLogin">Inicio de sesión</a></li>				
-					</ul>		
-				</ul>
+					<nav>
+					<div class="nav-wrapper">
+					<?php	
+						if (isset($_SESSION['Comprador'])) {
+							$arreglo=$_SESSION['Comprador'];
+							$usu=$arreglo[0]['Nombre'];
+                                                        $cor=$arreglo[0]['Correo'];
+                                                        $app=$arreglo[0]['Apellido'];
+                                                        $apm=$arreglo[0]['Apm'];
+                                                        $pas=$arreglo[0]['Pass'];
+                                                        $use=$arreglo[0]['Usu'];
+					?>
 
-				<ul class="side-nav" id="mobile-demo">
-					<li><a href="../catalogo/index.php">Tienda</a></li>
-					<li><a href="../carrito/index.php" id="BotonCarrito"><img height="50px" src="../img/carrito.png"></a></li>
-					<li><a href="../SignUp.php" id="BotonSignUp">Registrate</a></li>		
-					<li><a href="../Login.php" id="BotonLogin">Inicio de sesión</a></li>	
-					<li><a href="../ofertas/index.php">Ofertas</a></li>	
-					<li><a href="../tutoriales/index.php">Tutoriales</a></li>
-				</ul>
-			</div>		
-		</nav>	
-	</div>
-	<script type="text/javascript">$(".button-collapse").sideNav();</script>
-	<!-- Fin de la barra de navegacion-->
+					<a href="../index.php" id="Logo" class="brand-logo left" title="Inicio">n³</a>
+						<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"><i class="material-icons">menu</i></i></a>
+						<ul  id="enlaces_menu" class="hide-on-med-and-down">
+							<li><a href="index.php">Tienda</a></li>
+							<li><a href="../ofertas/index.php">Ofertas</a></li>
+							<li><a href="../tutoriales/index.php">Tutoriales</a></li>	
+							<ul id="" class="hide-on-med-and-down right">	
+								<li><a href="../carrito/index.php" id="BotonCarrito" title="Ver Carrito de Compras"><img height="50px" src="../img/carrito.png"></a></li>
+								<li><a href="#modal1" class="waves-effect waves-light modal-trigger" id="BotonSignUp" ><?php echo $usu; ?></a></li>
+								<li><a href="../cerrar.php" id="BotonLogin">Cerrar sesión</a></li>				
+							</ul>		
+						</ul>
+
+						<ul class="side-nav" id="mobile-demo">
+							<a href="../carrito/index.php" id="BotonCarrito"><img height="50px" src="../img/carrito.png"></a>
+							<li><a href="#modal1" class="waves-effect waves-light modal-trigger" id="BotonSignUp" ><?php echo $usu; ?></a></li>
+							<li><a href="index.php">Tienda</a></li>
+							<li><a href="../ofertas/index.php">Ofertas</a></li>	
+							<li><a href="../tutoriales/index.php">Tutoriales</a></li>
+							<li><a href="../cerrar.php" id="BotonLogin">Cerrar de sesión</a></li>
+						</ul>
+	
+					</div>		
+				</nav>	
+			</div>
+			<script type="text/javascript">$(".button-collapse").sideNav();</script>
+
+					<?php
+						}else{ ?>
+						<a href="../index.php" id="Logo" class="brand-logo left" title="Inicio">n³</a>
+						<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"><i class="material-icons">menu</i></i></a>
+						<ul  id="enlaces_menu" class="hide-on-med-and-down">
+							<li><a href="index.php">Tienda</a></li>
+							<li><a href="../ofertas/index.php">Ofertas</a></li>
+							<li><a href="../tutoriales/index.php">Tutoriales</a></li>	
+							<ul id="" class="hide-on-med-and-down right">	
+								<li><a href="../carrito/index.php" id="BotonCarrito" title="Ver Carrito de Compras"><img height="50px" src="../img/carrito.png"></a></li>
+								<li><a href="../SignUp.php" id="BotonSignUp">Registrate</a></li>
+								<li><a href="../Login.php" id="BotonLogin">Inicio de sesión</a></li>				
+							</ul>		
+						</ul>
+
+						<ul class="side-nav" id="mobile-demo">
+						|	<a href="../carrito/index.php" id="BotonCarrito"><img height="50px" src="../img/carrito.png"></a>	
+							<li><a href="../SignUp.php" id="BotonSignUp">Registrate</a></li>		
+							<li><a href="../Login.php" id="BotonLogin">Inicio de sesión</a></li>	
+							<li><a href="index.php">Tienda</a></li>
+							<li><a href="../ofertas/index.php">Ofertas</a></li>	
+							<li><a href="../tutoriales/index.php">Tutoriales</a></li>
+						</ul>
+	
+					</div>		
+				</nav>	
+			</div>
+			<script type="text/javascript">$(".button-collapse").sideNav();</script>
+					<?php
+						}
+					?>	
+			<!-- Fin de la barra de navegacion-->
+
+			<!--Perfil-->
+
+			<div id="modal1" class="modal">
+				<div class="modal-content">
+					<h5 class="center">Perfil</h5>
+					<div class="col s12 m16 l16">
+						<div class="center">
+							<img src="../img/profile.png" class="circle" width="150px">
+							<h6 class="grey-text">Correo: <?php echo $cor; ?></h6>
+							<hr>
+						</div>
+						<div id="datos" class="col s12 m12 l12">
+							<div class="col s6 m6 l6  left" >
+								<h6 class="grey-text">Nombre:</h6>
+								<h5><?php echo $usu; ?></h5>
+								<h6 class="grey-text">Apellido Paterno: </h6>
+								<h5><?php echo $app; ?></h5>
+								<h6 class="grey-text">Apellido Materno: </h6>
+								<h5><?php echo $apm; ?></h5>
+								<h6 class="grey-text">Nombre usuario: </h6>
+								<h5><?php echo $use; ?></h5>
+							</div>
+							<div class="col s12 m12 l12 right">
+								<!--<input type="submit" name="" value="Editar perfil" class="waves-effect waves-light btn green"> -->
+								<br><br>
+							<!--	<input type="submit" name="" value="Eliminar perfil" class="waves-effect waves-light btn red"> -->
+								<br>
+								<br>
+							<!--	<input type="submit" name="" value="Cambiar contraseña" class="modal-action modal-close waves-effect waves-green btn-flat blue white-text"> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+
+			<script type="text/javascript">
+				$(document).ready(function(){
+			    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+			    $('.modal-trigger').leanModal();});
+			</script>
+
+<!--PERFIL -->
+				<noscript>
+				<div class="container">
+					<center class="animated pulse infinite">
+				<h5><p>ATENCIÓN</p></h5>
+				<font color="red"><h5 class="red-text"><p>La página que estás viendo requiere para su funcionamiento el uso de JavaScript. 
+				Si lo has deshabilitado intencionadamente, por favor vuelve a activarlo.</p></h5></font>
+				</center>
+				</div>
+			</noscript>
 
 	<!-- parallax --> 
 	<script type="text/javascript">
@@ -74,8 +164,8 @@
 					<div class="col s12 m12 l12">
 						<div class="caption left-align">
 							<br><br><br><br><br><br><br><br><br><br>
-							<h3 class="white-text">La tienda de los <br> profesionales del <br> Rubik</h3>
-							<h5 class="light grey-text text-lighten-3">¡Productos de calidad!</h5>
+							<h3 class="white-text animated bounceInDown">La tienda de los <br> profesionales del <br> Rubik</h3>
+							<h5 class="light grey-text text-lighten-3 animated bounceInDown">¡Productos de calidad!</h5>
 						</div>
 					</div>
 				</div>
@@ -91,7 +181,7 @@
 
 	<!-- novedades -->
 
-	<div id="novedades" class="row">
+	<div id="novedades" class="row animated zoomIn">
 
 		<div class="container">
 
@@ -105,157 +195,107 @@
 				</div>
 
 				<div id="novedadesprincipales">
-					<!-- novedad -->
+					<!-- novedades -->
+				<?php
+					include '../conexion.php';
+					$re=mysql_query("select *, nomMar from producto as p inner join marca as m on m.idMar = p.idMar ORDER BY p.idProd DESC limit 4")or die(mysql_error());
+					while ($f=mysql_fetch_array($re)) {
+					
+				?>
 					<div  class="col s6 m3 l3">
 						<div class="card">
-							<div class="card-image waves-effect waves-block waves-light">
-								<img class="activator" src="img/novedad1.jpg">
-							</div>
-							<div class="card-content">
-								<span class="card-title activator grey-text text-darken-4">$500<i class="material-icons right">more_vert</i></span>
-								<p><a href="#">COMPRAR</a></p>
-							</div>
-							<div class="card-reveal">
-								<span class="card-title grey-text text-darken-4">Marca<i class="material-icons right">close</i></span>
-								<p>Descripcion</p>
-							</div>
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/<?php echo $f['imgProd']?>" width="500">
+						</div>
+						<div class="card-content">
+							<span class="card-title activator grey-text text-darken-4"><?php echo $f['desProd'];?><i class="material-icons right">more_vert</i></span>
+							<p><a href="../carrito/index.php?id=<?php echo $f['idProd']; ?>"><h6>Agregar al carrito</h6></a></p>
+						</div>
+						<div class="card-reveal">
+							<span class="card-title grey-text text-darken-4"><?php echo $f['desProd'];?><i class="material-icons right">close</i></span>
+							<p>Precio: $<?php echo $f['preProd'];?></p><p>Marca: <?php echo $f['nomMar']; ?></p>
+							<p>Base: <?php echo $f['col'] ?></p>
+							<p><a href="../carrito/index.php?id=<?php echo $f['idProd']; ?>"><h6>Agregar al carrito</h6></a></p>
 						</div>
 					</div>
-					<!-- novedad -->
-					<!-- novedad -->
-					<div  class="col s6 m3 l3">
-						<div class="card">
-							<div class="card-image waves-effect waves-block waves-light">
-								<img class="activator" src="img/novedad2.jpg">
-							</div>
-							<div class="card-content">
-								<span class="card-title activator grey-text text-darken-4">$500<i class="material-icons right">more_vert</i></span>
-								<p><a href="#">COMPRAR</a></p>
-							</div>
-							<div class="card-reveal">
-								<span class="card-title grey-text text-darken-4">Marca<i class="material-icons right">close</i></span>
-								<p>Descripcion</p>
-							</div>
-						</div>
 					</div>
-					<!-- novedad -->
-					<!-- novedad -->
-					<div  class="col s6 m3 l3">
-						<div class="card">
-							<div class="card-image waves-effect waves-block waves-light">
-								<img class="activator" src="img/novedad3.jpg">
-							</div>
-							<div class="card-content">
-								<span class="card-title activator grey-text text-darken-4">$500<i class="material-icons right">more_vert</i></span>
-								<p><a href="#">COMPRAR</a></p>
-							</div>
-							<div class="card-reveal">
-								<span class="card-title grey-text text-darken-4">Marca<i class="material-icons right">close</i></span>
-								<p>Descripcion</p>
-							</div>
-						</div>
-					</div>
-					<!-- novedad -->
-					<!-- novedad -->
-					<div  class="col s6 m3 l3">
-						<div class="card">
-							<div class="card-image waves-effect waves-block waves-light">
-								<img class="activator" src="img/novedad4.jpg">
-							</div>
-							<div class="card-content">
-								<span class="card-title activator grey-text text-darken-4">$500<i class="material-icons right">more_vert</i></span>
-								<p><a href="#">COMPRAR</a></p>
-							</div>
-							<div class="card-reveal">
-								<span class="card-title grey-text text-darken-4">Marca<i class="material-icons right">close</i></span>
-								<p>Descripcion</p>
-							</div>
-						</div>
-					</div>
-					<!-- novedad -->
+					<?php
+						}
+					?>
+					<!-- novedades -->
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- novedades -->
 
+	<!-- BUSCAR productos 
+
+	<div class="container">
+		<h5 class="grey-text">Buscar productos</h5>
+		<div class="input-field col s12">
+           <form>
+   <i class="material-icons prefix">search</i>
+          <input  type="text" class="validate" name="busqueda" id="busqueda" value=""  autocomplete="off" onKeyUp="buscar();">
+          <label for="busqueda">Comienza tu busqueda...</label>
+           </form>
+        </div>
+	</div> 
+<script>
+$(document).ready(function() {
+    $("#resultadoBusqueda").html('<p></p>');
+});
+
+function buscar() {
+    var textoBusqueda = $("input#busqueda").val();
+ 
+     if (textoBusqueda != "") {
+        $.post("buscar.php", {valorBusqueda: textoBusqueda}, function(mensaje) {
+            $("#resultadoBusqueda").html(mensaje);
+         }); 
+     } else { 
+        $("#resultadoBusqueda").html('<p></p>');
+        };
+};
+</script>
+
+	 BUSCAR productos -->
+
 	<div id="wrap">
 		<!-- productos -->
 
+                <div class="container" id="resultadoBusqueda"> </div>
 		<div class="container">
 			<div class="row">
 
 				<!-- producto -->
-				<div class="col s12 m6 l3">
+				<?php
+				include '../conexion.php';
+				$re=mysql_query("select *, nomMar from producto as p inner join marca as m on m.idMar = p.idMar")or die(mysql_error());
+				while ($f=mysql_fetch_array($re)) {
+					
+					?>
+					<div class="col s12 m6 l4">
 					<div class="card">
 						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator" src="img/producto1.jpg" width="500">
+							<img class="activator" src="images/<?php echo $f['imgProd']?>" width="500">
 						</div>
 						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">Nombre producto<i class="material-icons right">more_vert</i></span>
-							<p><a href="#"><h5>COMPRAR</h5></a></p>
+							<span class="card-title activator grey-text text-darken-4"><?php echo $f['desProd'];?><i class="material-icons right">more_vert</i></span>
+							<p><a href="../carrito/index.php?id=<?php echo $f['idProd']; ?>"><h6>Agregar al carrito</h6></a></p>
 						</div>
 						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">Nombre producto<i class="material-icons right">close</i></span>
-							<p>Here is some more information about this product that is only revealed once clicked on.</p>
+							<span class="card-title grey-text text-darken-4"><?php echo $f['desProd'];?><i class="material-icons right">close</i></span>
+							<p>Precio: $<?php echo $f['preProd'];?></p><p>Marca: <?php echo $f['nomMar']; ?></p>
+							<p>Base: <?php echo $f['col'] ?></p>
+							<p><a href="../carrito/index.php?id=<?php echo $f['idProd']; ?>"><h6>Agregar al carrito</h6></a></p>
 						</div>
 					</div>			
 				</div>
+				<?php
+				}
+				?>
 				<!-- producto-->
-
-					<!-- producto -->
-				<div class="col s12 m6 l3">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator" src="img/producto1.jpg" width="500">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">Nombre producto<i class="material-icons right">more_vert</i></span>
-							<p><a href="#"><h5>COMPRAR</h5></a></p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">Nombre producto<i class="material-icons right">close</i></span>
-							<p>Here is some more information about this product that is only revealed once clicked on.</p>
-						</div>
-					</div>			
-				</div>
-				<!-- producto-->
-					<!-- producto -->
-				<div class="col s12 m6 l3">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator" src="img/producto1.jpg" width="500">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">Nombre producto<i class="material-icons right">more_vert</i></span>
-							<p><a href="#"><h5>COMPRAR</h5></a></p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">Nombre producto<i class="material-icons right">close</i></span>
-							<p>Here is some more information about this product that is only revealed once clicked on.</p>
-						</div>
-					</div>			
-				</div>
-				<!-- producto-->
-						<!-- producto -->
-				<div class="col s12 m6 l3">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator" src="img/producto1.jpg" width="500">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">Nombre producto<i class="material-icons right">more_vert</i></span>
-							<p><a href="#"><h5>COMPRAR</h5></a></p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">Nombre producto<i class="material-icons right">close</i></span>
-							<p>Here is some more information about this product that is only revealed once clicked on.</p>
-						</div>
-					</div>			
-				</div>
-				<!-- producto-->
-
-
 			</div>
 		</div>
 		<!-- productos -->
@@ -316,4 +356,4 @@
 
 
 </body>
-</html>
+</html>			

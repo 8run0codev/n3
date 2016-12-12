@@ -12,15 +12,18 @@ if (isset($_SESSION['Usuario'])) {
 
 <?php
 	$nombre=$_POST['nombre'];
-	$apellido=$_POST['apellido'];
+	$apellido=$_POST['apellidopaterno'];
+
+        $aom=$_POST['apellidomaterno'];
 	$usuario=$_POST['user'];
 	$password=$_POST['password'];
 	$correo=$_POST['correo'];
 	$tipo=1;
-	$Sql="insert into cuenta (Nombre,Apellido,Usuario,Password,Correo,tipo)
+	$Sql="insert into cuenta (Nombre,Apellido,apm,Usuario,Password,Correo,tipo)
 			values(
 				'".$nombre."',
 				'".$apellido."',
+                                '".$apm."',
 				'".$usuario."',
 				'".$password."',
 				'".$correo."',

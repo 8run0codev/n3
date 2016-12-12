@@ -2,7 +2,7 @@
 
 session_start();
 include 'conexion.php';
-$re=mysql_query("select * from cuenta where Usuario='".$_POST['Usuario']."' OR Correo='".$_POST['Usuario']."' AND Password='".$_POST['pass']."'") or die(mysql_error());
+$re=mysql_query("select * from cuenta where Correo='".$_POST['mail']."' AND Password='".$_POST['pass']."'") or die(mysql_error());
 	
 	while ($f=mysql_fetch_array($re)) {
 		$tip=$f['tipo'];
@@ -13,8 +13,12 @@ $re=mysql_query("select * from cuenta where Usuario='".$_POST['Usuario']."' OR C
 							'Tipo'=>$f['tipo']);
 		}elseif ($tip==2) {
 			$cosa[]=array('Nombre'=>$f['Nombre'],
-							'Apellido'=>$f['Apellido'],
-							'Tipo'=>$f['tipo']);
+				      'Apellido'=>$f['Apellido'],
+                                      'Apm'=>$f['apm'],
+                                      'Usu'=>$f['Usuario'],
+                                      'Pass'=>$f['Password'],
+                                      'Correo'=>$f['Correo'],
+		              	      'Tipo'=>$f['tipo']);
 		}
 
 	}
@@ -28,7 +32,8 @@ $re=mysql_query("select * from cuenta where Usuario='".$_POST['Usuario']."' OR C
 		}else{
 		header("Location: index.php");
 		}
-	}else{
+	}else{	
+
 		header("Location: Login.php?error=datos no validos");
 	}
 

@@ -26,7 +26,7 @@ include '../conexion.php';
 				'".($arreglo[$i]['Precio']*$arreglo[$i]['Cantidad'])."'
 				)")or die(mysql_error());
 		}
-		unset($_SESSION['carrito']);	
+			
 		header("Location: metodo.php");
 	}else{
 

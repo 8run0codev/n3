@@ -3,15 +3,11 @@
 session_start();
 if (isset($_SESSION['Usuario'])) {
 
-}else{
-	header("Location: index.php?Error=Acceso denegado");
-}
-
 ?>
 <?php
 	include '../conexion.php';
 	if(!isset($_POST['nombre'])  && !isset($_POST['precio'])){
-		header("Location: registrar.php");
+		header("Location: http://ncubico.com/index.php?Datos=Datos No Validos");
 	}else{
 			$allowedExts = array("gif", "jpeg", "jpg", "png");
 			$temp = explode(".", $_FILES["file"]["name"]);
@@ -35,29 +31,40 @@ if (isset($_SESSION['Usuario'])) {
 		    	if(file_exists("../catalogo/images/".$random.'_'.$_FILES["file"]["name"])){
 		      		echo $_FILES["file"]["name"] . " Ya existe. ";
 		      	}else{
+
 		      		move_uploaded_file($_FILES["file"]["tmp_name"],
 		      		"../catalogo/images/" .$random.'_'.$_FILES["file"]["name"]);
 		      		echo "Archivo guardado en " . "../catalogo/images/" .$random.'_'. $_FILES["file"]["name"];
 		      		$producto=$_POST['nombre'];
 					$descripcion=$_POST['descripcion'];
 					$precio=$_POST['precio'];
+					$col=$_POST['Color'];
+                                        $can=$_POST['Cantidad'];
 					$marca=1;
 					$cat=1;
-					$Sql="insert into producto (desProd,preProd,idMar,idSubCat,imgProd) values(
+					$id=1;
+					$Sql="insert into producto (desProd,preProd,idMar,idSubCat,imgProd,col,Cantidad) values(
 							'".$producto."',
 							'".$precio."',
 							'".$marca."',
 							'".$cat."',
-							'".$imagen."')";
+							'".$imagen."',
+							'".$col."',
+                                                        '".$can."')";
 					mysql_query($Sql)or die(mysql_error());
-					header ("Location: registrar.php");
+					
+					header ("Location: http://ncubico.com/index.php?Bien=datos guardados");
 		      }
 		    }
 		  }else{
 		  echo "Formato no soportado";
-		  header("Location: registrar.php");
+		  header("Location: http://ncubico.com/index.php?Formato=no soportado");
 		  }
 
 		
 	}
+
+}else{
+	header("Location: ../403.html?Error=Acceso denegado");
+}
 ?>

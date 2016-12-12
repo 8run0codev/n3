@@ -1,8 +1,8 @@
 <?php 
-	include "conexion.php";
+	include "../conexion.php";
 	if($_POST['Caso']=="Eliminar"){
 		mysql_query("delete from producto where idProd=".$_POST['Id']);
-		unlink("../productos/".$_POST['Imagen']);
+		unlink("../catalogo/images/".$_POST['Imagen']);
 		echo 'El producto se ha eliminado';
 	}
 	if($_POST['Caso']=="Modificar"){

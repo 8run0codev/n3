@@ -1474,7 +1474,7 @@ textarea.materialize-textarea + label:after{display:block;content:"";position:ab
 .input-field label{color:#9e9e9e;position:absolute;top:0.8rem;font-size:1rem;cursor:text;transition:.2s ease-out;}
 .input-field label.active{font-size:0.8rem;-webkit-transform:translateY(-140%);transform:translateY(-140%);}
 .input-field .prefix{position:absolute;width:3rem;font-size:2rem;transition:color .2s;}
-.input-field .prefix.active{color:#26a69a;}
+.input-field .prefix.active{color:#ff6431;}
 .input-field .prefix ~ input,
 .input-field .prefix ~ textarea,
 .input-field .prefix ~ label,

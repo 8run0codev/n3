@@ -1,4 +1,6 @@
+
 var inicio=function   (){
+
 	$(".cantidad").keyup(function(e){
 		if($(this).val()!=''){
 			if(e.keyCode==13){
@@ -6,7 +8,7 @@ var inicio=function   (){
 				var precio=$(this).attr('data-precio');
 				var cantidad=$(this).val();
 				$(this).parentsUntil('.producto').find('.subtotal').text('Subtotal: '+(precio*cantidad));
-				$.post('./js/modificarDatos.php',{
+				$.post('../js/modificarDatos.php',{
 					Id:id,
 					Precio:precio,
 					Cantidad:cantidad
@@ -20,15 +22,15 @@ var inicio=function   (){
 		e.preventDefault();
 		var id=$(this).attr('data-id');
 		$(this).parentsUntil('.producto').remove();
-		$.post('./js/eliminar.php',{
+		$.post('../js/eliminar.php',{
 			Id:id
 		},function(a){
 			
 			if(a=='0'){
-				location.href="./index.php";
+				location.href="index.php";
 			}
 		});
 
 	});
 }
-$(document).on('ready',inicio);
+$(document).on('ready',inicio);	
