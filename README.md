@@ -10,13 +10,18 @@ admin@cubos.com
 Usuario standar 
 prueba@prueba.com 
 12345
-
-Proyecto escolar  @mccreeper98 & @8run0codev
-
-Errores conocidos:
-404 en algunos enlaces
-Validaciones
-Seguridad
-
-Stack de tecnologías:
+<hr>
+<b>Proyecto escolar  @mccreeper98 & @8run0codev<b>
+<hr>
+Errores conocidos:<br>
+404 en algunos enlaces<br>
+Validaciones<br>
+Seguridad<br>
+<hr>
+Stack de tecnologías:<br>
 LAMP 
+
+Thanks: <br>
+<b>Materialize<b> v0.97.8 https://github.com/Dogfalo/materialize <br>
+<b>Animate.css<b> https://github.com/daneden/animate.css <Br>
+<b>Sweet Alert<b> https://github.com/t4t5/sweetalert
